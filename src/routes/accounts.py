@@ -35,8 +35,6 @@ from security.interfaces import JWTAuthManagerInterface
 
 router = APIRouter()
 
-ACCOUNTS_URL = "api/v1/accounts/"
-
 
 @router.post(
     "/register/",
