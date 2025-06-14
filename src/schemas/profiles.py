@@ -40,7 +40,7 @@ class ProfileCreateSchema(BaseModel):
 
     @field_validator("first_name", "last_name")
     @classmethod
-    def validate_name_field(cls, name: str) -> str:
+    def validate_name_field(cls, name: str, info) -> str:
         try:
             validate_name(name)
             return name.lower()
@@ -49,8 +49,7 @@ class ProfileCreateSchema(BaseModel):
                 status_code=422,
                 detail=[{
                     "type": "value_error",
-                    "loc": [
-                        "first_name" if "first_name" in name else "last_name"],
+                    "loc": [info.field_name],
                     "msg": str(e),
                     "input": name
                 }]
